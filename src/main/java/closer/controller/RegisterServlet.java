@@ -1,8 +1,6 @@
 package closer.controller;
 
 import closer.registration.UserDao;
-import closer.models.User;
-import closer.utils.HibernateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

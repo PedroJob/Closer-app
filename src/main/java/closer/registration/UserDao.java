@@ -5,44 +5,40 @@ import closer.utils.HashMd5;
 import closer.utils.HibernateUtil;
 import jakarta.persistence.*;
 import java.sql.SQLException;
-
 import org.hibernate.*;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-public class UserDao {
+public class UserDao extends GenericDao{
 
     public List<User> getAll() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = session.beginTransaction();
-        List<User> users = session.createQuery("FROM User").getResultList();
-        t.commit();
-        return users;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction t = session.beginTransaction();
+            List<User> allUsers = session.createQuery("FROM User", User.class).getResultList();
+            t.commit();
+            return allUsers;
+        } catch (HibernateException e) {
+            handleException(e);
+            return null;
+        }
     }
 
     public User getByUsername(String username) {
-        User user = null;
-        try{
-            Session session = HibernateUtil.getSessionFactory().openSession();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction t = session.beginTransaction();
-
-            Query query = session.createQuery("FROM User WHERE username= :username").setParameter("username", username);
-            user = (User) query.getSingleResult();
+            Query query = session.createQuery("FROM User WHERE username = :username", User.class);
+            query.setParameter("username", username);
+            User user = (User) query.getSingleResult();
             t.commit();
-
             return user;
-        } catch(HibernateException e) {
+        } catch (HibernateException e) {
             handleException(e);
+            return null;
         }
-
-        return user;
     }
 
     public User createUser(String email, String username, String password) {
-        Session session = null; // Declare session outside the try block
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Transaction t = session.beginTransaction();
 
             User u = new User();
@@ -51,42 +47,13 @@ public class UserDao {
 
             String hash = HashMd5.hash(password);
             u.setPassword(hash);
-            session.save(u);
+            session.persist(u);
 
             t.commit();
             return u;
         } catch (HibernateException e) {
             handleException(e);
-            return null; // Or handle the exception according to your application's logic
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close(); // Close the session in the finally block
-            }
-        }
-    }
-
-
-    private void handleException(Exception ex) {
-        if (ex instanceof SQLException) {
-            printSQLException((SQLException) ex);
-        } else {
-            ex.printStackTrace();
-        }
-    }
-
-    private void printSQLException(SQLException ex) {
-        for (Throwable e: ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
+            return null;
         }
     }
 

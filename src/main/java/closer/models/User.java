@@ -3,10 +3,8 @@ package closer.models;
 import closer.utils.HashMd5;
 import jakarta.persistence.*;
 
-import java.security.NoSuchAlgorithmException;
-
 @Entity
-@Table(name = "users", schema = "closer", catalog = "")
+@Table(name = "users", schema = "closer")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

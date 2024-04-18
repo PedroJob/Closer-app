@@ -1,8 +1,21 @@
 package closer.models;
 
-import java.io.IOException;
-import java.io.Serializable;
+import jakarta.persistence.*;
 
-public class Chats implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = "chats")
+public class Chats {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ChatID", nullable = false)
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }
