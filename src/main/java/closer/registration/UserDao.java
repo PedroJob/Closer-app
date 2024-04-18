@@ -1,61 +1,77 @@
 package closer.registration;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-
 import closer.models.User;
+import closer.utils.HashMd5;
+import closer.utils.HibernateUtil;
+import jakarta.persistence.*;
+import java.sql.SQLException;
+
+import org.hibernate.*;
+
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class UserDao {
 
-    public int registerUser(User user ) {
-        String INSERT_USER_SQL = "INSERT INTO users" + "(UserName, UserEmail, UserPassWordHash, UserProfilePic) VALUES" + "(?, ?, ?, ?);";
-
-        int result = 0;
-
-        try (Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost:3306/closer?useSSL=false", "root", "154263LoL");
-                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL)) {
-                preparedStatement.setString(1, user.getUserName());
-                preparedStatement.setString(2, user.getUserEmail());
-                preparedStatement.setString(3, user.getUserPassword());
-                preparedStatement.setString(4, user.getUserProfilePic());
-
-                System.out.println(preparedStatement);
-                // Step 3: Execute the query or update query
-                result = preparedStatement.executeUpdate();
-
-        }catch(SQLException e) {
-        // process sql exception
-            printSQLException(e);
-        }
-
-        return result;
+    public List<User> getAll() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        List<User> users = session.createQuery("FROM User").getResultList();
+        t.commit();
+        return users;
     }
 
-    public boolean validateUser(User user) {
-        String VALIDATE_USER_SQL = "select * from login where username = ? and password = ?";
-        boolean status = false;
+    public User getByUsername(String username) {
+        User user = null;
+        try{
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = session.beginTransaction();
 
-        try (Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost:3306/closer?useSSL=false", "root", "154263LoL");
-             PreparedStatement preparedStatement = connection.prepareStatement(VALIDATE_USER_SQL)) {
-            preparedStatement.setString(1, user.getUserName());
-            preparedStatement.setString(2, user.getUserPassword());
+            Query query = session.createQuery("FROM User WHERE username= :username").setParameter("username", username);
+            user = (User) query.getSingleResult();
+            t.commit();
 
-            System.out.println(preparedStatement);
-            // Step 3: Execute the query or update query
-            ResultSet resultSet = preparedStatement.executeQuery();
-            status = resultSet.next();
-
-        }catch(SQLException e) {
-            // process sql exception
-            printSQLException(e);
+            return user;
+        } catch(HibernateException e) {
+            handleException(e);
         }
 
-        return status;
+        return user;
+    }
+
+    public User createUser(String email, String username, String password) {
+        Session session = null; // Declare session outside the try block
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            Transaction t = session.beginTransaction();
+
+            User u = new User();
+            u.setEmail(email);
+            u.setUsername(username);
+
+            String hash = HashMd5.hash(password);
+            u.setPassword(hash);
+            session.save(u);
+
+            t.commit();
+            return u;
+        } catch (HibernateException e) {
+            handleException(e);
+            return null; // Or handle the exception according to your application's logic
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close(); // Close the session in the finally block
+            }
+        }
+    }
+
+
+    private void handleException(Exception ex) {
+        if (ex instanceof SQLException) {
+            printSQLException((SQLException) ex);
+        } else {
+            ex.printStackTrace();
+        }
     }
 
     private void printSQLException(SQLException ex) {
@@ -73,4 +89,5 @@ public class UserDao {
             }
         }
     }
+
 }

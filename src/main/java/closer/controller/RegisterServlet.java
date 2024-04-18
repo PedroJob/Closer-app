@@ -1,44 +1,40 @@
 package closer.controller;
 
-import java.io.IOException;
-
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
-
 import closer.registration.UserDao;
 import closer.models.User;
+import closer.utils.HibernateUtil;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/register")
-public class UserServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private UserDao userDao;
+import java.io.IOException;
 
-    public void init() {
-        userDao = new UserDao();
+@WebServlet(name = "signup", value = "/signup")
+public class RegisterServlet extends HttpServlet {
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getRequestDispatcher("/signup.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String name = request.getParameter("UserName");
-        String password = request.getParameter("UserPasswordHash");
         String email = request.getParameter("UserEmail");
-        String profilePic = request.getParameter("UserProfilePic");
-
-        User user = new User();
-        user.setUserEmail(email);
-        user.setUserName(name);
-        user.setUserPassword(password);
-        user.setUserProfilePic(profilePic);
+        String username = request.getParameter("UserName");
+        String password = request.getParameter("UserPassword");
 
         try {
-            userDao.registerUser(user);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            UserDao manager = new UserDao();
+            manager.createUser(email, username, password);
+        } catch(Exception e) {
+            request.getSession().setAttribute("error", "Erro desconhecido");
+            response.sendRedirect("/signup");
         }
 
-        response.sendRedirect("groups.jsp"); // TODO
+        response.sendRedirect("/groups");
+    }
+
+    public void destroy() {
     }
 }

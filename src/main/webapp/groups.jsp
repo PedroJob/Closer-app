@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -33,14 +35,14 @@
                 <div class="Closer-pagination-box">
                     <button disabled><img src="static/img/arrow.svg" alt="Voltar"></button>
                     <p>Group List</p>
-                    <button class="Closer-flip-horizontal"><img class="Closer" src="static/img/arrow.svg" alt="PrÃ³xima"></button>
+                    <button class="Closer-flip-horizontal"><img class="Closer" src="static/img/arrow.svg" alt="Próxima"></button>
                 </div>
             </div>
             
             <div id="card-container" class="row">
-                <!-- Cards serÃ£o adicionados dinamicamente aqui -->
+                <!-- Cards serão adicionados dinamicamente aqui -->
                 <script>
-                    // Dados do usuÃ¡rio (vai ser recuperado atraves do BD)
+                    // Dados do usuário (vai ser recuperado atraves do BD)
                     const userData = [
                         { groupName: "Grupo 1", groupType: "Family", imageURL: "static/img/family.jpg" },
                         { groupName: "Grupo 2", groupType: "Friends", imageURL: "static/img/friends.jpg" },
@@ -48,7 +50,7 @@
                         { groupName: "Grupo 4", groupType: "Friends", imageURL: "static/img/friends.jpg" }
                     ];
                 
-                    // FunÃ§Ã£o para criar e adicionar os cards dinamicamente
+                    // Função para criar e adicionar os cards dinamicamente
 
                     function createCards() {
                         const cardContainer = document.getElementById("card-container");
@@ -76,16 +78,16 @@
                             openButton.textContent = "Open";
                             openButton.classList.add("Closer-btn");
 
-                            // Adicionando evento de clique ao botÃ£o "Open"
+                            // Adicionando evento de clique ao botão "Open"
                             openButton.addEventListener("click", () => {
-                                // Criando um URL personalizado com parÃ¢metros de consulta
+                                // Criando um URL personalizado com parâmetros de consulta
                                 const urlParams = new URLSearchParams();
                                 urlParams.append("groupName", data.groupName);
                                 urlParams.append("groupType", data.groupType);
                                 urlParams.append("imageURL", data.imageURL);
                                 const url = `chat.jsp?${urlParams.toString()}`;
 
-                                // Redirecionando para a pÃ¡gina chat.jsp com os parÃ¢metros de consulta
+                                // Redirecionando para a página chat.jsp com os parâmetros de consulta
                                 window.location.href = url;
                             });
 
@@ -101,7 +103,7 @@
                         });
                     }
 
-                    // Chame a funÃ§Ã£o para criar os cards quando a pÃ¡gina carregar
+                    // Chame a função para criar os cards quando a página carregar
                     window.addEventListener("DOMContentLoaded", createCards);
                 </script>
             </div>
