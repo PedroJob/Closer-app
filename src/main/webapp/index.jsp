@@ -10,15 +10,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/indexStyle.css">
+    <link rel="stylesheet" href="static/css/indexStyle.css">
     <header>
         <nav class="container">
             <h1>Closer</h1>
             <div class="Closer-contact-container">
-                <img src="img/github.svg" alt="Github">
+                <img src="static/img/github.svg" alt="Github">
                 <a>User Name</a>
             </div>
-            <a href="form.html" class="btn btn-primary">Novo Grupo</a>
+            <a href="form.jsp" class="btn btn-primary">Novo Grupo</a>
         </nav>
     </header>
 </head>
@@ -31,9 +31,9 @@
 
             <div class="Closer-pagination-container">
                 <div class="Closer-pagination-box">
-                    <button disabled><img src="img/arrow.svg" alt="Voltar"></button>
+                    <button disabled><img src="static/img/arrow.svg" alt="Voltar"></button>
                     <p>Group List</p>
-                    <button class="Closer-flip-horizontal"><img class="Closer" src="img/arrow.svg" alt="Próxima"></button>
+                    <button class="Closer-flip-horizontal"><img class="Closer" src="static/img/arrow.svg" alt="Próxima"></button>
                 </div>
             </div>
             
@@ -42,10 +42,10 @@
                 <script>
                     // Dados do usuário (vai ser recuperado atraves do BD)
                     const userData = [
-                        { groupName: "Grupo 1", groupType: "Family", imageURL: "img/family.jpg" },
-                        { groupName: "Grupo 2", groupType: "Friends", imageURL: "img/friends.jpg" },
-                        { groupName: "Grupo 3", groupType: "Date", imageURL: "img/date.jpg" },
-                        { groupName: "Grupo 4", groupType: "Friends", imageURL: "img/friends.jpg" }
+                        { groupName: "Grupo 1", groupType: "Family", imageURL: "static/img/family.jpg" },
+                        { groupName: "Grupo 2", groupType: "Friends", imageURL: "static/img/friends.jpg" },
+                        { groupName: "Grupo 3", groupType: "Date", imageURL: "static/img/date.jpg" },
+                        { groupName: "Grupo 4", groupType: "Friends", imageURL: "static/img/friends.jpg" }
                     ];
                 
                     // Função para criar e adicionar os cards dinamicamente
@@ -83,7 +83,7 @@
                                 urlParams.append("groupName", data.groupName);
                                 urlParams.append("groupType", data.groupType);
                                 urlParams.append("imageURL", data.imageURL);
-                                const url = `chat.html?${urlParams.toString()}`;
+                                const url = `chat.jsp?${urlParams.toString()}`;
 
                                 // Redirecionando para a página chat.jsp com os parâmetros de consulta
                                 window.location.href = url;

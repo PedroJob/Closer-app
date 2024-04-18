@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formulário de Contato com JavaScript</title>
-  <link rel="stylesheet" href="css/formStyle.css" />
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="static/css/formStyle.css" />
+<%--  <script defer src="app.js"></script>--%>
 </head>
 <body>
   <form action="https://formsubmit.co/ajax/peteramvs@gmail.com"
@@ -37,8 +37,8 @@
         participantesContainer.innerHTML = ''; // Limpa os campos existentes
         
         if (numParticipantes > 0) {
-          for (var i = 0; i < numParticipantes; i++) {
-            var participanteDiv = document.createElement('div');
+          for (let i = 0; i < numParticipantes; i++) {
+            const participanteDiv = document.createElement('div');
             participanteDiv.innerHTML = `
               <label for="participante_${i+1}">Participante ${i+1}</label>
               <input type="text" name="participante_${i+1}" id="participante_${i+1}" required />

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group Chat</title>
-  <link rel="stylesheet" href="css/chatStyle.css">
+  <link rel="stylesheet" href="static/css/chatStyle.css">
 </head>
 
 <body>
@@ -15,8 +15,8 @@
   </div>
   <ion-icon id="like" name="heart"></ion-icon>
   
-  <script src="javascript/cardScript.js"></script>
-  <script src="javascript/chatScript.js"></script>
+  <script src="static/javascript/cardScript.js"></script>
+  <script src="static/javascript/chatScript.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -60,15 +60,15 @@
       "Selfie em um jantar à luz de velas"
       ];
       
-      if(groupType == 0){
+      if(groupType === 0){
         alert("Desafio do Dia: "+ temasFamiliares[diaDaSemana]);
       }
       
-      else if(groupType == 1){
+      else if(groupType === 1){
         alert("Desafio do Dia: "+ temasAmigos[diaDaSemana]);
       }
       
-      else if(groupType == 2){
+      else if(groupType === 2){
         alert("Desafio do Dia: "+ temasNamoro[diaDaSemana]);
       }
       
