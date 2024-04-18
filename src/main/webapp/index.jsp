@@ -15,7 +15,7 @@
         <nav class="container">
             <h1>Closer</h1>
             <div class="Closer-contact-container">
-                <img src="img/github.svg" alt="Github">
+                <img src="static/img/github.svg" alt="Github">
                 <a>User Name</a>
             </div>
             <a href="form.html" class="btn btn-primary">Novo Grupo</a>

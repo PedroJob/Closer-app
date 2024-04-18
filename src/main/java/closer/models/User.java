@@ -1,10 +1,12 @@
 package closer.models;
 
-public class user {
+import java.io.Serializable;
+
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String UserName;
     private String UserEmail;
     private String UserPassword;
-    private int UserID;
     private String UserProfilePic;
 
     public String getUserName() {
@@ -31,29 +33,11 @@ public class user {
         UserPassword = userPassword;
     }
 
-    public int getUserID() {
-        return UserID;
-    }
-
-    public void setUserID(int userID) {
-        UserID = userID;
-    }
-
     public String getUserProfilePic() {
         return UserProfilePic;
     }
 
     public void setUserProfilePic(String userProfilePic) {
         UserProfilePic = userProfilePic;
-    }
-
-    public user(String userName, String userEmail, String userPassword, int userID, String userProfilePic) {
-        UserName = userName;
-        UserEmail = userEmail;
-        UserPassword = userPassword;
-        UserID = userID;
-        UserProfilePic = userProfilePic;
-
-
     }
 }
