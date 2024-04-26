@@ -10,11 +10,19 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+
 body {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background: linear-gradient(0deg, rgb(12, 35, 64), rgb(21, 51, 91)) no-repeat;
+  background-image: url("backgroundChat.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin: 0;
+  padding: 0;
 }
 
 #swiper {
@@ -33,7 +41,7 @@ body {
   border-radius: 20px;
   overflow: hidden;
   transform: translateZ(calc(-30px * var(--i))) translateY(calc(-20px * var(--i))) rotate(calc(-4deg * var(--i)));
-  filter: drop-shadow(2px 2px 20px rgba(5, 4, 4, 0.5)); 
+  filter: drop-shadow(2px 2px 20px rgba(212, 212, 212, 0.5));
   cursor: pointer;
   user-select: none;
   transition: transform 0.5s;
@@ -46,13 +54,41 @@ body {
   object-position: 50% 50%;
 }
 
+.upload-section {
+  margin-top: 20px; /* Adiciona algum espaço entre os cards e o botão de upload */
+}
+
+.upload-section input[type="text"] {
+  width: 100%; /* Define a largura total para o input de texto */
+  padding: 10px; /* Adiciona algum preenchimento interno */
+  font-size: 16px; /* Tamanho da fonte */
+  border: 1px solid #ccc; /* Adiciona uma borda para destacar o input de texto */
+  border-radius: 5px; /* Adiciona cantos arredondados */
+  margin-bottom: 10px; /* Adiciona algum espaço na parte inferior para evitar que o input de texto fique muito próximo do botão de upload */
+}
+
+.btn-upload {
+  width: 100%; /* Define a largura total para o botão de upload */
+  padding: 10px; /* Adiciona algum preenchimento interno */
+  font-size: 16px; /* Tamanho da fonte */
+  background-color: #4CAF50; /* Cor de fundo verde */
+  color: white; /* Cor do texto branco */
+  border: none; /* Remove a borda */
+  border-radius: 5px; /* Adiciona cantos arredondados */
+  cursor: pointer; /* Altera o cursor para um ponteiro quando passa sobre o botão */
+  transition: background-color 0.3s; /* Adiciona uma transição suave para a cor de fundo */
+}
+
+.btn-upload:hover {
+  background-color: #45a049; /* Altera a cor de fundo para um tom mais escuro quando passa o mouse sobre o botão */
+}
 #like,
 #dislike {
   font-size: 16vh;
   border-radius: 50%;
   padding: 20px;
   position: relative;
-  z-index: 1;
+  z-index: 2; /* Adiciona uma camada acima dos cards */
   animation-name: animation1;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
@@ -64,15 +100,14 @@ body {
 #dislike.trigger {
   animation-name: animation2;
 }
-
 #like {
-  color: #ff88f0; 
+  color: #ff88f0;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
 #dislike {
   color: #ccc;
-  background-color: rgba(21, 51, 91, 0.5); 
+  background-color: rgba(21, 51, 91, 0.5);
 }
 
 @keyframes animation1 {

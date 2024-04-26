@@ -14,7 +14,7 @@
   <div id="swiper">
   </div>
   <ion-icon id="like" name="heart"></ion-icon>
-  
+
   <script src="static/javascript/cardScript.js"></script>
   <script src="static/javascript/chatScript.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -28,7 +28,7 @@
       // Descobrir o dia da semana:
       var dataAtual = new Date();
       var diaDaSemana = dataAtual.getDay();
-      
+
       // Banco de dados dos desafios:
       const temasFamiliares = [
       "Selfie durante um almoço em família",
@@ -59,19 +59,19 @@
       "Selfie trocando olhares apaixonados",
       "Selfie em um jantar à luz de velas"
       ];
-      
+
       if(groupType === 0){
         alert("Desafio do Dia: "+ temasFamiliares[diaDaSemana]);
       }
-      
+
       else if(groupType === 1){
         alert("Desafio do Dia: "+ temasAmigos[diaDaSemana]);
       }
-      
+
       else if(groupType === 2){
         alert("Desafio do Dia: "+ temasNamoro[diaDaSemana]);
       }
-      
+
       else{
         alert("Front-End saying: Error!");
       }

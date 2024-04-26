@@ -2,6 +2,7 @@ package closer.registration;
 
 import closer.models.Groups;
 import closer.models.User;
+import closer.models.GroupsUsers;
 import closer.models.GroupsChat;
 import closer.models.Chats;
 import closer.utils.HibernateUtil;
@@ -12,11 +13,9 @@ import java.util.List;
 public class GroupsDao extends GenericDao{
     public List<Groups> getAllByUser(User user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Transaction t = session.beginTransaction();
-            List<Groups> allGroups = session.createQuery("FROM GroupsUsers gu JOIN Groups g ON gu.group.id = g.id WHERE gu.user.id = :user", Groups.class)
+            List<Groups> allGroups = session.createQuery("SELECT g FROM GroupsUsers ug JOIN ug.group g WHERE ug.user.id = :user", Groups.class)
                     .setParameter("user", user.getId())
                     .getResultList();
-            t.commit();
             return allGroups;
         } catch (HibernateException e) {
             handleException(e);

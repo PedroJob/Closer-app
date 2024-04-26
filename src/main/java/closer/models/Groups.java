@@ -16,6 +16,33 @@ public class Groups {
     @Column(name = "TypeID")
     private int type;
 
+    public enum GroupType {
+        FAMILY(0, "family.jpg"),
+        FRIENDS(1, "friends.jpg"),
+        DATE(2, "date.jpg");
+
+        private final int typeCode;
+        private final String imagePath;
+
+        GroupType(int typeCode, String imagePath) {
+            this.typeCode = typeCode;
+            this.imagePath = imagePath;
+        }
+
+        public String getImagePath() {
+            return imagePath;
+        }
+
+        public static GroupType fromTypeCode(int typeCode) {
+            for (GroupType type : values()) {
+                if (type.typeCode == typeCode) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Unknown GroupType code: " + typeCode);
+        }
+    }
+
     public int getId() {
         return id;
     }
@@ -40,4 +67,7 @@ public class Groups {
         this.type = type;
     }
 
+    public String getImageFileName() {
+        return GroupType.fromTypeCode(this.type).getImagePath();
+    }
 }

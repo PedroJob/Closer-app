@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1" import="closer.models.User"%>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -18,7 +18,14 @@
             <h1>Closer</h1>
             <div class="Closer-contact-container">
                 <img src="static/img/github.svg" alt="Github">
-                <a>User Name</a>
+                <a><% User user = (User) request.getSession().getAttribute("user");
+                    if(user != null) {
+                        String username = user.getUsername(); // Replace getUsername() with the actual method name
+                        out.println("Hello, " + username);
+                    } else {
+                        out.println("<a href='login.jsp'>Log in</a>");
+                    }
+                %></a>
             </div>
             <a href="form.jsp" class="btn btn-primary">Novo Grupo</a>
         </nav>
@@ -38,18 +45,18 @@
                     <button class="Closer-flip-horizontal"><img class="Closer" src="static/img/arrow.svg" alt="Próxima"></button>
                 </div>
             </div>
-            
+
             <div id="card-container" class="row">
                 <!-- Cards serão adicionados dinamicamente aqui -->
                 <script>
-                    // Dados do usuário (vai ser recuperado atraves do BD)
+
                     const userData = [
                         { groupName: "Grupo 1", groupType: "Family", imageURL: "static/img/family.jpg" },
                         { groupName: "Grupo 2", groupType: "Friends", imageURL: "static/img/friends.jpg" },
                         { groupName: "Grupo 3", groupType: "Date", imageURL: "static/img/date.jpg" },
                         { groupName: "Grupo 4", groupType: "Friends", imageURL: "static/img/friends.jpg" }
                     ];
-                
+
                     // Função para criar e adicionar os cards dinamicamente
 
                     function createCards() {
