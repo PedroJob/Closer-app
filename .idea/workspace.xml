@@ -9,15 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b443a2b-7809-4245-8422-d024e3c88f51" name="Changes" comment="add web application folder">
-      <change beforePath="$PROJECT_DIR$/src/main/java/closer/controller/GroupsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/closer/controller/GroupsServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/closer/models/Groups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/closer/models/Groups.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/closer/registration/GroupsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/closer/registration/GroupsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/chat.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/chat.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/groups.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/groups.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/css/chatStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/css/chatStyle.css" afterDir="false" />
-    </list>
+    <list default="true" id="9b443a2b-7809-4245-8422-d024e3c88f51" name="Changes" comment="add web application folder" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -225,6 +217,7 @@
       <workItem from="1713383402128" duration="20267000" />
       <workItem from="1713416087789" duration="8458000" />
       <workItem from="1713436484429" duration="20918000" />
+      <workItem from="1714094441617" duration="624000" />
     </task>
     <task id="LOCAL-00001" summary="add web application folder">
       <option name="closed" value="true" />
